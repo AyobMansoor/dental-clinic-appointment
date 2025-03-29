@@ -1,0 +1,82 @@
+CREATE DATABASE dental_clinic;
+USE dental_clinic;
+
+-- users table
+CREATE TABLE users (
+    id INT(100) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    user_role ENUM('admin', 'doctor', 'user') NOT NULL DEFAULT 'user',
+    otp VARCHAR(6) NULL,
+    otp_expiry DATETIME NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- patients table
+CREATE TABLE patients (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) NOT NULL,
+    age INT(11) NOT NULL,
+    gender ENUM('Male', 'Female') NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- specializations table
+CREATE TABLE specializations (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- doctors table
+CREATE TABLE doctors (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) NOT NULL UNIQUE,
+    specialization_id INT(11) NULL,
+    phone VARCHAR(100) NULL,
+    account_status ENUM('active', 'inactive') NOT NULL DEFAULT 'inactive',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (specialization_id) REFERENCES specializations(id) ON DELETE SET NULL
+);
+
+-- doctor_availability table
+CREATE TABLE doctor_availability (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    doctor_id INT(11) NOT NULL,
+    available_day ENUM('Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday') NOT NULL,
+    created_by_admin TINYINT(4) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE CASCADE
+);
+
+-- appointments table
+CREATE TABLE appointments (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT(11) NOT NULL,
+    doctor_id INT(11) NOT NULL,
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    visit_type ENUM('General Dentistry', 'Cosmetic Dentistry', 'Orthodontics', 'Periodontics', 'Oral Surgery', 'Prosthodontics') NOT NULL,
+    status ENUM('confirmed', 'cancelled') NOT NULL DEFAULT 'confirmed',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE CASCADE
+);
+
+-- notifications table
+CREATE TABLE notifications (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) NOT NULL,
+    message TEXT NOT NULL,
+    type ENUM('new_appointment', 'cancellation') NOT NULL,
+    is_read TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
