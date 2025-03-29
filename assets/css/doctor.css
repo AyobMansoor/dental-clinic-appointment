@@ -1,0 +1,34 @@
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .appointment-card {
+        flex-direction: column;
+        align-items: start !important;
+    }
+    
+    .appointment-actions {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .tooth-marker {
+        margin-left: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar, .header, .toast-container {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}

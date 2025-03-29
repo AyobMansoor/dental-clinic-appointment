@@ -1,0 +1,14 @@
+{
+    "name": "dentelo/dentelo-master",
+    "description": "phpmailer/phpmailer",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yes"
+        }
+    ]
+}

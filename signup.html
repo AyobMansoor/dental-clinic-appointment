@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up </title>
+  <link rel="stylesheet" href="./assets/css/login.css">
+</head>
+<body>
+
+    <!-- Signup Form -->
+  <form id="signupForm" class="modern-form" method="POST" action="php/signup.php">
+    <div class="form-title">Sign up</div>
+    <div class="form-body">
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Firstname" class="form-input" type="text" name="firstname" />
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Lastname" class="form-input" type="text" name="lastname" />
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Email" class="form-input" type="email" name="email" />
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Password" class="form-input" type="password" name="password" />
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Confirm Password" class="form-input" type="password" name="confirm_password" />
+        </div>
+      </div>
+    </div>
+    <button class="submit-button" type="submit">
+      <span class="button-text">Sign up</span>
+    </button>
+    <button type="button" class="submit-button" onclick="window.location.href='php/logout.php';">Cancel</button>
+    <div class="form-footer">
+      <p>Already have an account? <a class="login-link"  onclick="window.location.href='login.html';"> Login</a></p>
+    </div>
+  </form>
+
+
+</body>
+</html>

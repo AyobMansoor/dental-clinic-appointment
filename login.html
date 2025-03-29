@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Login </title>
+  <link rel="stylesheet" href="./assets/css/login.css">
+  
+</head>
+<body>
+  <!-- Login Form -->
+  <form id="loginForm" class="modern-form" method="POST" action="php/login.php" >
+    <div class="form-title">Login</div>
+    <div class="form-body">
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Email" class="form-input" type="email" name="email" />
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <input required placeholder="Password" class="form-input" type="password" name="password" />
+        </div>
+      </div>
+    </div>
+    <button class="submit-button" type="submit" >
+      <span class="button-text"> login </span>
+    </button>
+    <button type="button" class="submit-button" onclick="window.location.href='index.html';">Cancel</button>
+    <div class="form-footer">
+      <a class="login-link" onclick="window.location.href='signup.html';">Create New account? <span>Sign up</span></a>
+      <br> <br>
+      <a class="login-link" onclick="href='php/forgot_password.php';">Forgot Password? <span>here</span></a>
+    </div>
+  </form>
+
+  
+ 
+
+ 
+</body>
+</html>
